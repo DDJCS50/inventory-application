@@ -1,0 +1,22 @@
+{
+  "name": "inventory-application",
+  "version": "1.0.0",
+  "description": "Project for creating an inventory management system",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "createdb": "node db/populatedb"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-async-handler": "^1.2.0",
+    "express-validator": "^7.2.0",
+    "pg": "^8.13.1"
+  }
+}
