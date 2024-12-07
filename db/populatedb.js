@@ -1,26 +1,33 @@
 const { Client } = require("pg");
 
-let currentDate = new Date().toString();
-
 // TODO: write table creation script after db initialization
 const SQL = `
-CREATE TABLE IF NOT EXISTS messages (
+CREATE TABLE IF NOT EXISTS categories (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  username VARCHAR ( 255 ),
-  textInput VARCHAR ( 255 ),
-  added VARCHAR ( 255 ),
-  details VARCHAR ( 255 )
+  name VARCHAR ( 255 ) UNIQUE NOT NULL
 );
 
-INSERT INTO messages (username, textInput, added, details) 
+INSERT INTO categories (name)
 VALUES 
-  ('Bryan', 'Hello from Bryan', '${currentDate}', 'I just wanted to say hello first'),
-  ('Odin', 'Hello from Odin', '${currentDate}', 'I just wanted to say hello second');
+  ('Fruit');
+
+CREATE TABLE IF NOT EXISTS items (
+  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  category_id INTEGER REFERENCES categories,
+  name VARCHAR ( 255 ) UNIQUE NOT NULL,
+  description TEXT NOT NULL,
+  price NUMERIC(6, 2) NOT NULL
+);
+
+INSERT INTO items (category_id, name, description, price)
+VALUES 
+  (1, 'Apple', 'Shiny apple here', 1.99);
 `;
 
 // Reset table
 const resetTableSQL = `
-DROP TABLE messages;
+DROP TABLE items;
+DROP TABLE categories;
 `;
 
 async function main(dbConnection) {
@@ -29,7 +36,6 @@ async function main(dbConnection) {
     connectionString: dbConnection,
   });
   await client.connect();
-  console.log(currentDate);
   console.log("connected");
   await client.query(SQL);
   await client.end();

@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "createdb": "node db/populatedb"
+    "createdb": "node db/populatedb",
+    "dev": "node --watch app.js"
   },
   "keywords": [],
   "author": "",

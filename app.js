@@ -10,6 +10,15 @@ app.use(express.urlencoded({ extended: true }));
 
 mountRoutes(app);
 
+app.use((req, res, next) => {
+  console.log("Route does not exist");
+  res.status(404).send({
+    status: 404,
+    message: "Route does not exist",
+    type: "internal",
+  });
+});
+
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(err.statusCode || 500).send(err.message);
