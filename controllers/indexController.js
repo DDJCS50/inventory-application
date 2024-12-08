@@ -5,7 +5,8 @@ const CustomNotFoundError = require("../errors/CustomNotFoundError");
 
 const alphaErr = "must only contain letters.";
 
-const validateInput = [body("category-name").trim().isAlpha().withMessage(`Category name ${alphaErr}`)];
+const validateCategoryInput = [body("category-name").trim().isAlpha().withMessage(`Category name ${alphaErr}`)];
+const validateItemInput = [body("item-name").trim().isAlpha().withMessage(`Item name ${alphaErr}`)];
 
 exports.indexPageGet = asyncHandler(async (req, res) => {
   const categoriesSelected = await db.getAllCategories();
@@ -22,34 +23,41 @@ exports.categoryCreateGet = asyncHandler(async (req, res) => {
 });
 
 exports.itemCreateGet = asyncHandler(async (req, res) => {
-  const temp = "query item creation page here";
-  if (!temp) {
-    throw new CustomNotFoundError("Item form not found");
-  }
-
-  res.send(temp);
+  res.render("itemForm");
 });
 
 exports.categoryDisplayGet = asyncHandler(async (req, res) => {
-  const temp = `query category displayed page here, id: ${req.params.id}`;
-  if (!temp) {
+  const categoryId = req.params.id;
+  if (!categoryId) {
     throw new CustomNotFoundError("Category not found");
   }
 
-  res.send(temp);
+  const category = await db.getCategoryById(Number(categoryId));
+  const items = await db.getItemsInCategory(Number(categoryId));
+
+  res.render("categoryDisplay", {
+    category: category[0],
+    categoryName: category[0].name,
+    items: items,
+  });
 });
 
 exports.itemDisplayGet = asyncHandler(async (req, res) => {
-  const temp = `query item displayed page here, id: ${req.params.id}`;
-  if (!temp) {
+  const itemId = req.params.id;
+  if (!itemId) {
     throw new CustomNotFoundError("Item not found");
   }
 
-  res.send(temp);
+  const item = await db.getItemById(Number(itemId));
+
+  res.render("itemDisplay", {
+    item: item[0],
+    itemName: item[0].name,
+  });
 });
 
 exports.categoryCreatePost = [
-  validateInput,
+  validateCategoryInput,
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
 
@@ -59,10 +67,22 @@ exports.categoryCreatePost = [
       });
     }
 
-    const categoriesSelected = await db.getAllCategories();
+    res.redirect("/");
+  }),
+];
 
-    if (!categoriesSelected) {
-      throw new CustomNotFoundError("Category form not found");
+exports.itemCreatePost = [
+  validateItemInput,
+  validateCategoryInput,
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+
+    //TODO Add checking to see if the category even exists in the db
+
+    if (!errors.isEmpty()) {
+      return res.status(400).render("itemForm", {
+        errors: errors.array(),
+      });
     }
 
     res.redirect("/");

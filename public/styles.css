@@ -1,9 +1,10 @@
 main {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   gap: 12px;
+  min-height: 80vh;
 }
 main .mainError {
   display: flex;
@@ -14,6 +15,53 @@ main .mainError {
 main .mainError h2 {
   color: darkred;
 }
-main div ul {
+main .mainError ul {
+  flex-direction: column;
+  gap: 8px;
+}
+main ul {
   list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+}
+main ul li {
+  list-style-type: none;
+}
+
+body {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  width: auto;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 10vh;
+  min-width: 100%;
+}
+header h1 {
+  align-self: flex-start;
+  padding-left: 32px;
+}
+header a {
+  align-self: flex-start;
+  padding-left: 32px;
+}
+header a h1 {
+  padding-left: 0px;
+}
+
+footer {
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

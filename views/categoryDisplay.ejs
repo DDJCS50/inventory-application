@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>
+    <%= categoryName %>
+  </title>
+</head>
+
+<body>
+  <header>
+    <a href="/">
+      <h1>Odin Foods</h1>
+    </a>
+  </header>
+  <main>
+    <%- include("partials/errors.ejs") %>
+
+      <ul>
+        <% if (locals.category) {%>
+
+          <li>
+            Category ID: <%= category.id %>
+              <br>
+              Name: <%= category.name %>
+          </li>
+
+          <% } %>
+      </ul>
+      <ul>
+        <% if (locals.items) {%>
+          <% items.forEach(item=> { %>
+            <a href="/item/<%= item.id %>">
+
+              <li>
+                Item ID: <%= item.id %>
+                  <br>
+                  Name: <%= item.name %>
+                    <br>
+                    Description: <%= item.description %>
+                      <br>
+                      Price: $<%= item.price %>
+              </li>
+            </a>
+            <% }); %>
+              <% } %>
+      </ul>
+  </main>
+  <footer>
+    <h3>Copyright 2024 DDJCS50</h3>
+  </footer>
+</body>
+
+</html>

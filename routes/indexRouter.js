@@ -10,6 +10,7 @@ indexRouter.get("/category/:id", indexController.categoryDisplayGet);
 indexRouter.get("/item/:id", indexController.itemDisplayGet);
 
 indexRouter.post("/createCategory", indexController.categoryCreatePost);
+indexRouter.post("/createItem", indexController.itemCreatePost);
 
 indexRouter.use((req, res, next) => {
   console.log("Route does not exist");

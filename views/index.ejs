@@ -12,22 +12,27 @@
   <header>
     <h1>Odin Foods</h1>
     <a href="/createCategory">Create New Category</a>
+    <a href="/createItem">Create New Item</a>
   </header>
   <main>
     <div>
       <ul>
 
         <% categories.forEach((category)=> { %>
-          <li>
-            Category Name:
-            <%= category.name %>
-          </li>
+          <a href="/category/<%= category.id %>">
+            <li>
+              Category Name:
+              <%= category.name %>
+            </li>
+          </a>
           <% }) %>
 
       </ul>
     </div>
   </main>
-  <footer></footer>
+  <footer>
+    <h3>Copyright 2024 DDJCS50</h3>
+  </footer>
 </body>
 
 </html>

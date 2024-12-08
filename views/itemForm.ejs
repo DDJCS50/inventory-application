@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Item Creation</title>
+</head>
+
+<body>
+  <header>
+    <a href="/">
+      <h1>Odin Foods</h1>
+    </a>
+  </header>
+  <main>
+    <%- include("partials/errors.ejs") %>
+
+      <form action="/createItem" method="POST" id="createItemForm">
+        <label for="item-name">Item Name: </label>
+        <input type="text" name="item-name" id="item">
+
+        <label for="category-name">Category: </label>
+        <input type="text" name="category-name" id="category-name">
+
+        <button type="submit">Submit</button>
+      </form>
+  </main>
+  <footer>
+    <h3>Copyright 2024 DDJCS50</h3>
+  </footer>
+</body>
+
+</html>
