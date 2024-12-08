@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Odin Foods</title>
+</head>
+
+<body>
+  <header>
+    <h1>Odin Foods</h1>
+    <a href="/createCategory">Create New Category</a>
+  </header>
+  <main>
+    <div>
+      <ul>
+
+        <% categories.forEach((category)=> { %>
+          <li>
+            Category Name:
+            <%= category.name %>
+          </li>
+          <% }) %>
+
+      </ul>
+    </div>
+  </main>
+  <footer></footer>
+</body>
+
+</html>

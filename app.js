@@ -3,21 +3,14 @@ const app = express();
 require("dotenv").config();
 const path = require("node:path");
 const { mountRoutes } = require("./routes/index");
+const assetsPath = path.join(__dirname, "public");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(assetsPath));
 
 mountRoutes(app);
-
-app.use((req, res, next) => {
-  console.log("Route does not exist");
-  res.status(404).send({
-    status: 404,
-    message: "Route does not exist",
-    type: "internal",
-  });
-});
 
 app.use((err, req, res, next) => {
   console.error(err);

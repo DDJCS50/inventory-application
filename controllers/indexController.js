@@ -14,16 +14,11 @@ exports.indexPageGet = asyncHandler(async (req, res) => {
     throw new CustomNotFoundError("Main page not found");
   }
 
-  res.send(categoriesSelected);
+  res.render("index", { categories: categoriesSelected });
 });
 
 exports.categoryCreateGet = asyncHandler(async (req, res) => {
-  const temp = "query category creation page here";
-  if (!temp) {
-    throw new CustomNotFoundError("Category form not found");
-  }
-
-  res.send(temp);
+  res.render("categoryForm");
 });
 
 exports.itemCreateGet = asyncHandler(async (req, res) => {
@@ -56,12 +51,20 @@ exports.itemDisplayGet = asyncHandler(async (req, res) => {
 exports.categoryCreatePost = [
   validateInput,
   asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).render("categoryForm", {
+        errors: errors.array(),
+      });
+    }
+
     const categoriesSelected = await db.getAllCategories();
 
     if (!categoriesSelected) {
       throw new CustomNotFoundError("Category form not found");
     }
 
-    res.send(categoriesSelected);
+    res.redirect("/");
   }),
 ];

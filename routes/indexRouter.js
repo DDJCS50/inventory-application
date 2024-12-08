@@ -9,4 +9,15 @@ indexRouter.get("/createItem", indexController.itemCreateGet);
 indexRouter.get("/category/:id", indexController.categoryDisplayGet);
 indexRouter.get("/item/:id", indexController.itemDisplayGet);
 
+indexRouter.post("/createCategory", indexController.categoryCreatePost);
+
+indexRouter.use((req, res, next) => {
+  console.log("Route does not exist");
+  res.status(404).send({
+    status: 404,
+    message: "Route does not exist",
+    type: "internal",
+  });
+});
+
 module.exports = indexRouter;
