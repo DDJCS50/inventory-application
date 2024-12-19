@@ -18,11 +18,17 @@
     <%- include("partials/errors.ejs") %>
 
       <form action="/createItem" method="POST" id="createItemForm">
-        <label for="item-name">Item Name: </label>
-        <input type="text" name="item-name" id="item">
+        <label for="itemName">Item Name: </label>
+        <input type="text" name="itemName" id="itemName">
 
-        <label for="category-name">Category: </label>
-        <input type="text" name="category-name" id="category-name">
+        <label for="categoryName">Category: </label>
+        <input type="text" name="categoryName" id="categoryName">
+
+        <label for="itemDescription">Description: </label>
+        <textarea form="createItemForm" name="itemDescription" id="itemDescription" cols="25" rows="10"></textarea>
+
+        <label for="itemPrice">Price: </label>
+        <input type="number" step="any" name="itemPrice" id="itemPrice">
 
         <button type="submit">Submit</button>
       </form>

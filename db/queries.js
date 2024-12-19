@@ -21,6 +21,20 @@ async function getItemById(searchedId) {
   return rows;
 }
 
+async function getCategoryByName(searchedName) {
+  const { rows } = await db.query("SELECT * FROM categories WHERE name LIKE ($1)", [`%${searchedName}%`]);
+  return rows;
+}
+
+async function insertItem(itemName, categoryId, itemDescription, itemPrice) {
+  await db.query("INSERT INTO items (name, category_id, description, price) VALUES ($1, $2, $3, $4)", [itemName, categoryId, itemDescription, itemPrice]);
+}
+
+async function getItemByName(searchedName) {
+  const { rows } = await db.query("SELECT * FROM items WHERE name LIKE ($1)", [`%${searchedName}%`]);
+  return rows;
+}
+
 // async function deleteUsernames() {
 //   await db.query("DELETE FROM messages");
 // }
@@ -35,4 +49,7 @@ module.exports = {
   getCategoryById,
   getItemsInCategory,
   getItemById,
+  getCategoryByName,
+  insertItem,
+  getItemByName,
 };

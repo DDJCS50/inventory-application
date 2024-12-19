@@ -5,8 +5,8 @@ const CustomNotFoundError = require("../errors/CustomNotFoundError");
 
 const alphaErr = "must only contain letters.";
 
-const validateCategoryInput = [body("category-name").trim().isAlpha().withMessage(`Category name ${alphaErr}`)];
-const validateItemInput = [body("item-name").trim().isAlpha().withMessage(`Item name ${alphaErr}`)];
+const validateCategoryInput = [body("categoryName").trim().isAlpha().withMessage(`Category name ${alphaErr}`)];
+const validateItemInput = [body("itemName").trim().isAlpha().withMessage(`Item name ${alphaErr}`)];
 
 exports.indexPageGet = asyncHandler(async (req, res) => {
   const categoriesSelected = await db.getAllCategories();
@@ -66,7 +66,7 @@ exports.categoryCreatePost = [
         errors: errors.array(),
       });
     }
-
+    // TODO add posting logic and db checking
     res.redirect("/");
   }),
 ];
@@ -77,14 +77,35 @@ exports.itemCreatePost = [
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
 
-    //TODO Add checking to see if the category even exists in the db
-
     if (!errors.isEmpty()) {
       return res.status(400).render("itemForm", {
         errors: errors.array(),
       });
     }
+    const { itemName, categoryName, itemDescription, itemPrice } = req.body;
+
+    const selectedCategory = await db.getCategoryByName(categoryName);
+    const selectedItem = await db.getItemByName(itemName);
+
+    if (selectedCategory.length == 0) {
+      throw new CustomNotFoundError("Category not found");
+    } else if (selectedItem.length != 0) {
+      throw new CustomNotFoundError("Item already exists");
+    }
+    db.insertItem(itemName, selectedCategory[0].id, itemDescription, itemPrice);
 
     res.redirect("/");
   }),
 ];
+
+exports.itemUpdateGet = asyncHandler(async (req, res) => {
+  const itemId = req.params.id;
+  if (!itemId) {
+    throw new CustomNotFoundError("Item not found");
+  }
+
+  const item = await db.getItemById(Number(itemId));
+  res.render("itemUpdate", {
+    item: item[0],
+  });
+});
