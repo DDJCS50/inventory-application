@@ -66,7 +66,17 @@ exports.categoryCreatePost = [
         errors: errors.array(),
       });
     }
-    // TODO add posting logic and db checking
+
+    const { categoryName } = req.body;
+
+    const selectedCategory = await db.getCategoryByName(categoryName);
+
+    if (selectedCategory.length != 0) {
+      throw new CustomNotFoundError("Category already exists");
+    }
+
+    db.insertCategory(categoryName);
+
     res.redirect("/");
   }),
 ];
@@ -105,7 +115,30 @@ exports.itemUpdateGet = asyncHandler(async (req, res) => {
   }
 
   const item = await db.getItemById(Number(itemId));
+  const category = await db.getCategoryById(Number(item[0].category_id));
   res.render("itemUpdate", {
     item: item[0],
+    categoryName: category[0].name,
   });
+});
+
+exports.itemUpdatePost = asyncHandler(async (req, res) => {
+  const itemId = req.params.id;
+  if (!itemId) {
+    throw new CustomNotFoundError("Item not found");
+  }
+
+  const { itemName, categoryName, itemDescription, itemPrice } = req.body;
+
+  const selectedItem = await db.getItemById(itemId);
+  const selectedCategory = await db.getCategoryByName(categoryName);
+
+  if (selectedCategory.length == 0) {
+    throw new CustomNotFoundError("Category not found, category must exist before updating item");
+  } else if (selectedItem.length == 0) {
+    throw new CustomNotFoundError("Item id not found in records");
+  }
+
+  db.updateItemById(itemName, selectedCategory[0].id, itemDescription, itemPrice, selectedItem[0].id);
+  res.redirect("/");
 });

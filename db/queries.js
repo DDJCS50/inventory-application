@@ -1,15 +1,9 @@
 const db = require("../db/index.js");
 
-// TODO: add query scripts after db and table initialization
-
 async function getAllCategories() {
   const { rows } = await db.query("SELECT * FROM categories");
   return rows;
 }
-
-// async function insertMessage(username, textInput, added, details) {
-//   await db.query("INSERT INTO messages (username, textinput, added, details) VALUES ($1, $2, $3, $4)", [username, textInput, added, details]);
-// }
 
 async function getCategoryById(searchedId) {
   const { rows } = await db.query("SELECT * FROM categories WHERE id=($1)", [searchedId]);
@@ -35,6 +29,14 @@ async function getItemByName(searchedName) {
   return rows;
 }
 
+async function insertCategory(categoryName) {
+  await db.query("INSERT INTO categories (name) VALUES ($1)", [categoryName]);
+}
+
+async function updateItemById(itemName, categoryId, itemDescription, itemPrice, itemId) {
+  await db.query("UPDATE items SET name = ($1), category_id = ($2), description = ($3), price = ($4) WHERE id=($5)", [itemName, categoryId, itemDescription, itemPrice, itemId]);
+}
+
 // async function deleteUsernames() {
 //   await db.query("DELETE FROM messages");
 // }
@@ -52,4 +54,6 @@ module.exports = {
   getCategoryByName,
   insertItem,
   getItemByName,
+  insertCategory,
+  updateItemById,
 };

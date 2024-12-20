@@ -25,6 +25,7 @@ main ul {
   justify-content: center;
   align-items: center;
   padding: 0px;
+  gap: 8px;
 }
 main ul li {
   list-style-type: none;

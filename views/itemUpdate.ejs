@@ -15,10 +15,10 @@
     <form action="/updateItem/<%= item.id %>" method="POST" id="updateItemForm">
 
       <label for="itemName">Item Name: </label>
-      <input type="text" name="itemName" id="itemName" value="<%= item.price %>">
+      <input type="text" name="itemName" id="itemName" value="<%= item.name %>">
 
       <label for="categoryName">Category: </label>
-      <input type="text" name="categoryName" id="categoryName" value="<%= item.price %>">
+      <input type="text" name="categoryName" id="categoryName" value="<%= categoryName %>">
 
       <label for="itemDescription">Description: </label>
       <textarea form="updateItemForm" name="itemDescription" id="itemDescription" cols="25"
