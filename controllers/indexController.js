@@ -133,12 +133,51 @@ exports.itemUpdatePost = asyncHandler(async (req, res) => {
   const selectedItem = await db.getItemById(itemId);
   const selectedCategory = await db.getCategoryByName(categoryName);
 
+  const duplicateItemName = await db.getItemByName(itemName);
+
   if (selectedCategory.length == 0) {
     throw new CustomNotFoundError("Category not found, category must exist before updating item");
   } else if (selectedItem.length == 0) {
     throw new CustomNotFoundError("Item id not found in records");
+  } else if (duplicateItemName.length != 0) {
+    throw new CustomNotFoundError("Item name already exists!");
   }
 
   db.updateItemById(itemName, selectedCategory[0].id, itemDescription, itemPrice, selectedItem[0].id);
+  res.redirect("/");
+});
+
+exports.categoryUpdateGet = asyncHandler(async (req, res) => {
+  const categoryId = req.params.id;
+  if (!categoryId) {
+    throw new CustomNotFoundError("Category not found");
+  }
+
+  const category = await db.getCategoryById(Number(categoryId));
+  res.render("categoryUpdate", {
+    category: category[0],
+    categoryName: category[0].name,
+  });
+});
+
+exports.categoryUpdatePost = asyncHandler(async (req, res) => {
+  const categoryId = req.params.id;
+  if (!categoryId) {
+    throw new CustomNotFoundError("Category not found");
+  }
+
+  const { categoryName } = req.body;
+
+  const selectedCategory = await db.getCategoryById(Number(categoryId));
+
+  const duplicateCategoryName = await db.getCategoryByName(categoryName);
+
+  if (selectedCategory.length == 0) {
+    throw new CustomNotFoundError("Category id not found in records");
+  } else if (duplicateCategoryName.length != 0) {
+    throw new CustomNotFoundError("Category name already exists!");
+  }
+
+  db.updateCategoryById(categoryName, selectedCategory[0].id);
   res.redirect("/");
 });

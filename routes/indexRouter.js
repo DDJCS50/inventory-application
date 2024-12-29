@@ -10,6 +10,8 @@ indexRouter.get("/category/:id", indexController.categoryDisplayGet);
 indexRouter.get("/item/:id", indexController.itemDisplayGet);
 indexRouter.get("/updateItem/:id", indexController.itemUpdateGet);
 indexRouter.post("/updateItem/:id", indexController.itemUpdatePost);
+indexRouter.get("/updateCategory/:id", indexController.categoryUpdateGet);
+indexRouter.post("/updateCategory/:id", indexController.categoryUpdatePost);
 
 indexRouter.post("/createCategory", indexController.categoryCreatePost);
 indexRouter.post("/createItem", indexController.itemCreatePost);

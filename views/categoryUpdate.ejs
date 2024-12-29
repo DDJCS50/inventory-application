@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Category</title>
+</head>
+
+<body>
+  <h1>
+    Update Category
+  </h1>
+  <%- include("partials/errors.ejs") %>
+    <form action="/updateCategory/<%= category.id %>" method="POST" id="updateCategoryForm">
+
+      <label for="categoryName">Category Name: </label>
+      <input type="text" name="categoryName" id="categoryName" value="<%= category.name %>">
+
+      <button type="submit">Update category</button>
+    </form>
+    <a href="/">Back to home</a>
+</body>
+
+</html>

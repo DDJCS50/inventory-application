@@ -37,6 +37,10 @@ async function updateItemById(itemName, categoryId, itemDescription, itemPrice, 
   await db.query("UPDATE items SET name = ($1), category_id = ($2), description = ($3), price = ($4) WHERE id=($5)", [itemName, categoryId, itemDescription, itemPrice, itemId]);
 }
 
+async function updateCategoryById(categoryName, categoryId) {
+  await db.query("UPDATE categories SET name = ($1) WHERE id=($2)", [categoryName, categoryId]);
+}
+
 // async function deleteUsernames() {
 //   await db.query("DELETE FROM messages");
 // }
@@ -56,4 +60,5 @@ module.exports = {
   getItemByName,
   insertCategory,
   updateItemById,
+  updateCategoryById,
 };
