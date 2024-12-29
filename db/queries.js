@@ -41,9 +41,14 @@ async function updateCategoryById(categoryName, categoryId) {
   await db.query("UPDATE categories SET name = ($1) WHERE id=($2)", [categoryName, categoryId]);
 }
 
-// async function deleteUsernames() {
-//   await db.query("DELETE FROM messages");
-// }
+async function deleteItemById(itemId) {
+  await db.query("DELETE FROM items WHERE id=($1)", [itemId]);
+}
+
+async function deleteCategoryById(categoryId) {
+  await db.query("DELETE FROM items WHERE category_id=($1)", [categoryId]);
+  await db.query("DELETE FROM categories WHERE id=($1)", [categoryId]);
+}
 
 async function getItemsInCategory(searchedId) {
   const { rows } = await db.query("SELECT * FROM items WHERE category_id=($1)", [searchedId]);
@@ -61,4 +66,6 @@ module.exports = {
   insertCategory,
   updateItemById,
   updateCategoryById,
+  deleteItemById,
+  deleteCategoryById,
 };

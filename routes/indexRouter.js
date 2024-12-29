@@ -4,14 +4,20 @@ const indexController = require("../controllers/indexController");
 const indexRouter = Router();
 
 indexRouter.get("/", indexController.indexPageGet);
+
 indexRouter.get("/createCategory", indexController.categoryCreateGet);
 indexRouter.get("/createItem", indexController.itemCreateGet);
+
 indexRouter.get("/category/:id", indexController.categoryDisplayGet);
 indexRouter.get("/item/:id", indexController.itemDisplayGet);
+
 indexRouter.get("/updateItem/:id", indexController.itemUpdateGet);
 indexRouter.post("/updateItem/:id", indexController.itemUpdatePost);
 indexRouter.get("/updateCategory/:id", indexController.categoryUpdateGet);
 indexRouter.post("/updateCategory/:id", indexController.categoryUpdatePost);
+
+indexRouter.post("/deleteItem/:id", indexController.itemDeletePost);
+indexRouter.post("/deleteCategory/:id", indexController.categoryDeletePost);
 
 indexRouter.post("/createCategory", indexController.categoryCreatePost);
 indexRouter.post("/createItem", indexController.itemCreatePost);

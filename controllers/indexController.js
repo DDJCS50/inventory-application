@@ -5,8 +5,8 @@ const CustomNotFoundError = require("../errors/CustomNotFoundError");
 
 const alphaErr = "must only contain letters.";
 
-const validateCategoryInput = [body("categoryName").trim().isAlpha().withMessage(`Category name ${alphaErr}`)];
-const validateItemInput = [body("itemName").trim().isAlpha().withMessage(`Item name ${alphaErr}`)];
+const validateCategoryInput = [body("categoryName").trim().isAlpha("en-US", { ignore: " " }).withMessage(`Category name ${alphaErr}`)];
+const validateItemInput = [body("itemName").trim().isAlpha("en-US", { ignore: " " }).withMessage(`Item name ${alphaErr}`)];
 
 exports.indexPageGet = asyncHandler(async (req, res) => {
   const categoriesSelected = await db.getAllCategories();
@@ -179,5 +179,31 @@ exports.categoryUpdatePost = asyncHandler(async (req, res) => {
   }
 
   db.updateCategoryById(categoryName, selectedCategory[0].id);
+  res.redirect("/");
+});
+
+exports.itemDeletePost = asyncHandler(async (req, res) => {
+  const itemId = req.params.id;
+  if (!itemId) {
+    throw new CustomNotFoundError("Item not found");
+  }
+
+  const selectedItem = await db.getItemById(Number(itemId));
+  console.log(selectedItem);
+
+  await db.deleteItemById(selectedItem[0].id);
+  res.redirect("/");
+});
+
+exports.categoryDeletePost = asyncHandler(async (req, res) => {
+  const categoryId = req.params.id;
+  if (!categoryId) {
+    throw new CustomNotFoundError("Category not found");
+  }
+
+  const selectedCategory = await db.getCategoryById(Number(categoryId));
+
+  await db.deleteCategoryById(selectedCategory[0].id);
+
   res.redirect("/");
 });
