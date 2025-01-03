@@ -5,6 +5,7 @@ main {
   flex-direction: column;
   gap: 12px;
   min-height: 80vh;
+  width: 100%;
 }
 main .mainError {
   display: flex;
@@ -30,6 +31,75 @@ main ul {
 main ul li {
   list-style-type: none;
 }
+main .indexCategories {
+  font-size: large;
+}
+main .categoryNameBox {
+  font-size: 48px;
+  flex: 1;
+}
+main .categoryNameBox ul {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+main .categoryItems {
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 8;
+}
+main .categoryItems ul {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  gap: 24px;
+}
+main .categoryLinks {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-start;
+  padding-left: 32px;
+  gap: 48px;
+  font-size: 18px;
+}
+main .categoryLinks button {
+  color: red;
+  border: none;
+  background-color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+main .itemDetails {
+  flex: 9;
+}
+main .itemDetails ul {
+  flex-direction: column;
+  align-items: flex-start;
+}
+main .itemDetails ul img {
+  min-height: 500px;
+  min-width: 500px;
+  background-color: lightgrey;
+}
+main .itemLinks {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-start;
+  padding-left: 32px;
+  gap: 48px;
+  font-size: 18px;
+}
+main .itemLinks button {
+  color: red;
+  border: none;
+  background-color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
 
 body {
   display: flex;
@@ -38,6 +108,11 @@ body {
   flex-direction: column;
   min-height: 100vh;
   width: auto;
+  margin: 0px;
+}
+body a {
+  text-decoration: none;
+  color: darkgoldenrod;
 }
 
 header {
@@ -47,10 +122,14 @@ header {
   flex-direction: column;
   min-height: 10vh;
   min-width: 100%;
+  background-color: aquamarine;
 }
 header h1 {
   align-self: flex-start;
   padding-left: 32px;
+  font-size: 48px;
+  font-weight: bold;
+  color: darkgoldenrod;
 }
 header a {
   align-self: flex-start;
@@ -62,7 +141,151 @@ header a h1 {
 
 footer {
   min-height: 10vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: wheat;
+}
+
+.indexHeader {
+  font-size: large;
+}
+.indexHeader .indexCreateLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-start;
+}
+
+.categoryUpdate {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 12px;
+  color: darkgoldenrod;
+}
+.categoryUpdate button {
+  color: darkgreen;
+  border: none;
+  background-color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+.categoryUpdate a {
+  color: red;
+}
+.categoryUpdate form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.categoryUpdateTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: aquamarine;
+}
+
+.itemUpdate {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 12px;
+  color: darkgoldenrod;
+}
+.itemUpdate form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.itemUpdate form textarea {
+  min-height: 100px;
+  min-width: 200px;
+  max-height: 500px;
+  max-width: 500px;
+}
+.itemUpdate form .itemDescriptionBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.itemUpdate button {
+  color: darkgreen;
+  border: none;
+  background-color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+.itemUpdate a {
+  color: red;
+}
+
+.itemUpdateTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: aquamarine;
+}
+
+.categoryCreate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  color: darkgoldenrod;
+}
+.categoryCreate form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+.categoryCreate button {
+  color: darkgreen;
+  border: none;
+  background-color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.itemCreate {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 12px;
+  color: darkgoldenrod;
+}
+.itemCreate form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.itemCreate form textarea {
+  min-height: 100px;
+  min-width: 200px;
+  max-height: 500px;
+  max-width: 500px;
+}
+.itemCreate form .itemDescriptionBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.itemCreate button {
+  color: darkgreen;
+  border: none;
+  background-color: white;
+  font-size: 18px;
+  cursor: pointer;
 }

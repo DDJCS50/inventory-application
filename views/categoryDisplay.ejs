@@ -18,41 +18,43 @@
   </header>
   <main>
     <%- include("partials/errors.ejs") %>
+      <div class="categoryNameBox">
 
-      <ul>
-        <% if (locals.category) {%>
+        <ul>
+          <% if (locals.category) {%>
 
-          <li>
-            Category ID: <%= category.id %>
-              <br>
-              Name: <%= category.name %>
-          </li>
+            <li>
+              <%= category.name %>
+            </li>
 
-          <% } %>
-      </ul>
-      <ul>
-        <% if (locals.items) {%>
-          <% items.forEach(item=> { %>
-            <a href="/item/<%= item.id %>">
+            <% } %>
+        </ul>
+      </div>
+      <div class="categoryItems">
 
-              <li>
-                Item ID: <%= item.id %>
-                  <br>
-                  Name: <%= item.name %>
+        <ul>
+          <% if (locals.items) {%>
+            <% items.forEach(item=> { %>
+              <a href="/item/<%= item.id %>">
+
+                <li>
+                  <%= item.name %>
                     <br>
-                    Description: <%= item.description %>
-                      <br>
-                      Price: $<%= item.price %>
-              </li>
-            </a>
-            <% }); %>
-              <% } %>
-      </ul>
-      <a href="/updateCategory/<%= category.id %>">Update Category</a>
-      <form action="/deleteCategory/<%= category.id %>" method="POST" style="display:inline;">
-        <button type="submit" onclick="return confirm('Are you sure you want to delete this category?');">Delete
-          Category</button>
-      </form>
+                    $<%= item.price %>
+                </li>
+              </a>
+              <% }); %>
+                <% } %>
+        </ul>
+      </div>
+      <div class="categoryLinks">
+        <a href="/updateCategory/<%= category.id %>">Update Category</a>
+        <form action="/deleteCategory/<%= category.id %>" method="POST" style="display:inline;">
+          <button type="submit" onclick="return confirm('Are you sure you want to delete this category?');">Delete
+            Category</button>
+        </form>
+
+      </div>
   </main>
   <footer>
     <h3>Copyright 2024 DDJCS50</h3>

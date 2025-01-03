@@ -16,22 +16,29 @@
   </header>
   <main>
     <%- include("partials/errors.ejs") %>
+      <div class="itemCreate">
+        <form action="/createItem" method="POST" id="createItemForm">
+          <div>
+            <label for="itemName">Item Name: </label>
+            <input type="text" name="itemName" id="itemName">
+          </div>
+          <div>
+            <label for="categoryName">Category: </label>
+            <input type="text" name="categoryName" id="categoryName">
+          </div>
+          <div class="itemDescriptionBox">
+            <label for="itemDescription">Description: </label>
+            <textarea form="createItemForm" name="itemDescription" id="itemDescription" cols="25" rows="10"></textarea>
+          </div>
+          <div>
+            <label for="itemPrice">Price: </label>
+            <input type="number" step="any" name="itemPrice" id="itemPrice">
+          </div>
 
-      <form action="/createItem" method="POST" id="createItemForm">
-        <label for="itemName">Item Name: </label>
-        <input type="text" name="itemName" id="itemName">
+          <button type="submit">Create</button>
+        </form>
+      </div>
 
-        <label for="categoryName">Category: </label>
-        <input type="text" name="categoryName" id="categoryName">
-
-        <label for="itemDescription">Description: </label>
-        <textarea form="createItemForm" name="itemDescription" id="itemDescription" cols="25" rows="10"></textarea>
-
-        <label for="itemPrice">Price: </label>
-        <input type="number" step="any" name="itemPrice" id="itemPrice">
-
-        <button type="submit">Submit</button>
-      </form>
   </main>
   <footer>
     <h3>Copyright 2024 DDJCS50</h3>

@@ -16,12 +16,14 @@
   </header>
   <main>
     <%- include("partials/errors.ejs") %>
+      <div class="categoryCreate">
+        <form action="/createCategory" method="POST" id="createCategoryForm">
+          <label for="categoryName">Category Name: </label>
+          <input type="text" name="categoryName" id="categoryName">
+          <button type="submit">Create</button>
+        </form>
+      </div>
 
-      <form action="/createCategory" method="POST" id="createCategoryForm">
-        <label for="categoryName">Category Name: </label>
-        <input type="text" name="categoryName" id="categoryName">
-        <button type="submit">Submit</button>
-      </form>
   </main>
   <footer>
     <h3>Copyright 2024 DDJCS50</h3>

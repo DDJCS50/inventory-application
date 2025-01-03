@@ -9,13 +9,15 @@
 </head>
 
 <body>
-  <header>
+  <header class="indexHeader">
     <h1>Odin Foods</h1>
-    <a href="/createCategory">Create New Category</a>
-    <a href="/createItem">Create New Item</a>
+    <div class="indexCreateLinks">
+      <a href="/createCategory">Create New Category</a>
+      <a href="/createItem">Create New Item</a>
+    </div>
   </header>
   <main>
-    <div>
+    <div class="indexCategories">
       <ul>
 
         <% categories.forEach((category)=> { %>

@@ -4,32 +4,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
   <title>Update Item</title>
 </head>
 
 <body>
-  <h1>
-    Update Item
-  </h1>
+  <div class="itemUpdateTitle">
+
+    <h1>
+      Update Item
+    </h1>
+  </div>
   <%- include("partials/errors.ejs") %>
-    <form action="/updateItem/<%= item.id %>" method="POST" id="updateItemForm">
+    <div class="itemUpdate">
 
-      <label for="itemName">Item Name: </label>
-      <input type="text" name="itemName" id="itemName" value="<%= item.name %>">
+      <form action="/updateItem/<%= item.id %>" method="POST" id="updateItemForm">
+        <div>
+          <label for="itemName">Item Name: </label>
+          <input type="text" name="itemName" id="itemName" value="<%= item.name %>">
+        </div>
+        <div>
+          <label for="categoryName">Category: </label>
+          <input type="text" name="categoryName" id="categoryName" value="<%= categoryName %>">
+        </div>
+        <div class="itemDescriptionBox">
+          <label for="itemDescription">Description: </label>
+          <textarea form="updateItemForm" name="itemDescription" id="itemDescription" cols="25"
+            rows="10"><%= item.description %></textarea>
+        </div>
+        <div>
+          <label for="itemPrice">Price: </label>
+          <input type="number" step="any" name="itemPrice" id="itemPrice" value="<%= item.price %>">
+        </div>
 
-      <label for="categoryName">Category: </label>
-      <input type="text" name="categoryName" id="categoryName" value="<%= categoryName %>">
 
-      <label for="itemDescription">Description: </label>
-      <textarea form="updateItemForm" name="itemDescription" id="itemDescription" cols="25"
-        rows="10"><%= item.description %></textarea>
 
-      <label for="itemPrice">Price: </label>
-      <input type="number" step="any" name="itemPrice" id="itemPrice" value="<%= item.price %>">
-
-      <button type="submit">Update Item</button>
-    </form>
-    <a href="/">Back to home</a>
+        <button type="submit">Update</button>
+      </form>
+      <a href="/">Cancel</a>
+    </div>
 </body>
 
 </html>
